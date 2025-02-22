@@ -1,0 +1,2 @@
+# Simple-AI-Voice-Assistant-FastAPI
+A simple AI Voice Assistant backend using FastAPI. This application accepts text input (simulating voice commands), performs basic NLP processing (via keyword matching or using the Google Gemini API), returns a response, logs interactions, and serves a simple UI.

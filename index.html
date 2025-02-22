@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple AI Voice Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+    #response {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple AI Voice Assistant</h1>
+  <!-- Input field for the user to type their command -->
+  <input type="text" id="userInput" placeholder="Enter your command" />
+  <!-- Button to send the command -->
+  <button onclick="sendRequest()">Submit</button>
+
+  <h2>Response:</h2>
+  <!-- Area where the response will be displayed -->
+  <div id="response"></div>
+
+  <script>
+    // This function sends the user's command to the /process endpoint
+    async function sendRequest() {
+      const userInput = document.getElementById("userInput").value;
+      try {
+        const res = await fetch("/process", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ text: userInput })
+        });
+        const data = await res.json();
+        // Display the response in the #response div
+        document.getElementById("response").innerText = data.response;
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("response").innerText = "An error occurred.";
+      }
+    }
+  </script>
+</body>
+</html>
